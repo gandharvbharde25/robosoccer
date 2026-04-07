@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Team {
+  id        Int      @id @default(autoincrement())
+  name      String
+  gmail     String   @unique
+  members   String
+  college   String
+  present   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  matchesAsTeam1 Match[] @relation("Team1Matches")
+  matchesAsTeam2 Match[] @relation("Team2Matches")
+  wonMatches     Match[] @relation("WonMatches")
+}
+
+model Match {
+  id        Int      @id @default(autoincrement())
+  round     Int
+  team1Id   Int
+  team2Id   Int?
+  score1    Int?
+  score2    Int?
+  winnerId  Int?
+  status    String   @default("pending")
+  isBye     Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  team1  Team  @relation("Team1Matches", fields: [team1Id], references: [id])
+  team2  Team? @relation("Team2Matches", fields: [team2Id], references: [id])
+  winner Team? @relation("WonMatches", fields: [winnerId], references: [id])
+}
+
+model Settings {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+}
