@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   const teams = await prisma.team.findMany({ orderBy: { name: "asc" } });
   const header = "ID,Name,Gmail,College,Members,Present";
-  const lines = teams.map((t) => {
+  const lines = teams.map((t: typeof teams[0]) => {
     const members = JSON.parse(t.members || "[]").join("; ");
     return `${t.id},"${t.name}","${t.gmail}","${t.college}","${members}",${t.present}`;
   });
