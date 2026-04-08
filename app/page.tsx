@@ -28,22 +28,23 @@ export default async function Dashboard() {
   else if (currentRound >= 1) stage = `Round ${currentRound}`;
 
   const stats = [
-    { label: "Registered Teams", value: teams.length, sub: `${presentTeams.length} present` },
-    { label: "Matches Played", value: completedMatches.length, sub: `${pendingMatches.length} pending` },
-    { label: "Total Goals", value: totalGoals, sub: "across all rounds" },
+    { label: "Registered Teams", value: teams.length, sub: `${presentTeams.length} present`, icon: "🏟️" },
+    { label: "Matches Played", value: completedMatches.length, sub: `${pendingMatches.length} pending`, icon: "⚽" },
+    { label: "Total Goals", value: totalGoals, sub: "across all rounds", icon: "🎯" },
     {
       label: "Tournament Stage",
       value: stage === "Not Started" ? "—" : stage,
       sub: currentRound ? `Round ${currentRound} active` : "not started",
+      icon: "🏆",
     },
   ];
 
   const navItems = [
-    { href: "/attendance", label: "Mark Attendance", desc: "Toggle present/absent for teams", icon: "✓" },
+    { href: "/attendance", label: "Mark Attendance", desc: "Toggle present/absent for teams", icon: "📋" },
     { href: "/matches", label: "Manage Matches", desc: "Create matches and enter scores", icon: "⚽" },
     { href: "/results", label: "View Results", desc: "All match results by round", icon: "📊" },
     { href: "/bracket", label: "Tournament Bracket", desc: "Semifinals and finals bracket", icon: "🏆" },
-    ...(role === "admin" ? [{ href: "/admin", label: "Admin Controls", desc: "Reset, export, and manage data", icon: "⚙" }] : []),
+    ...(role === "admin" ? [{ href: "/admin", label: "Admin Controls", desc: "Reset, export, and manage data", icon: "⚙️" }] : []),
   ];
 
   const recentMatches = [...completedMatches].reverse().slice(0, 5);

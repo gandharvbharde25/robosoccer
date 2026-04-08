@@ -64,8 +64,8 @@ export async function POST(req: NextRequest) {
         },
       });
       results.created++;
-    } catch (e: any) {
-      results.errors.push(`${name}: ${e.message}`);
+    } catch (e) {
+      results.errors.push(`${name}: ${e instanceof Error ? e.message : String(e)}`);
     }
   }
 

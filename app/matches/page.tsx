@@ -647,6 +647,7 @@ export default function MatchesPage() {
     setLoading(false);
   }
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchAll(); }, []);
 
   const presentTeams = teams.filter((t) => t.present);

@@ -23,8 +23,8 @@ export async function POST(req: NextRequest) {
       },
     });
     return NextResponse.json(team);
-  } catch (e: any) {
-    if (e.code === "P2002") {
+  } catch (e: unknown) {
+    if (typeof e === 'object' && e !== null && 'code' in e && (e as { code?: string }).code === "P2002") {
       return NextResponse.json({ error: "Gmail already registered" }, { status: 409 });
     }
     throw e;

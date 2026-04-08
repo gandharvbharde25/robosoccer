@@ -200,10 +200,6 @@ export default function BracketPage() {
   const champion = finalMatch?.winner ?? null;
   const hasBracket = sfMatches.length > 0 || finalMatch;
 
-  const sfTeams = sfMatches.flatMap((m) => [m.team1, m.team2].filter(Boolean) as Team[]);
-  const sfTeamIds = new Set(sfTeams.map((t) => t.id));
-  const remainingWinners = uniqueWinners.filter((w) => !sfTeamIds.has(w.id));
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
